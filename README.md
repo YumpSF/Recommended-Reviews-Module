@@ -1,6 +1,6 @@
-# Project Name
+# YumpSF
 
-> Project description
+> Food Reviews
 
 ## Related Projects
 
