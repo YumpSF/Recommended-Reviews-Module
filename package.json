@@ -9,6 +9,7 @@
   },
   "scripts": {
     "start": "webpack-dev-server --mode development",
+    "build": "webpack --mode production",
     "seed": "node database/seed.js",
     "database": "mysql -u root < database/schema.sql",
     "react-dev": "",
@@ -21,12 +22,14 @@
     "mysql": "^2.16.0",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
+    "styled-components": "^4.0.2",
     "webpack-dev-server": "^3.1.10"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
     "babel-cli": "^6.26.0",
+    "babel-plugin-styled-components": "^1.8.0",
     "css-loader": "^1.0.0",
     "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
     "html-webpack-plugin": "^3.2.0",
