@@ -7,14 +7,13 @@ const Wrapper = styled.div`
   h2 {
   font-size: 21px;
     span {
+      padding-left: 20px;
       font-size: 21px;
       font-weight: bold;
       color: #d32323;
     }
   }
 `;
-
-
 
 class App extends React.Component {
   constructor (props) {

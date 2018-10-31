@@ -15,6 +15,7 @@ var restaurantReviews = function (id, callback) {
     INNER JOIN restaurant ON restaurant.restaurant_id = users_reviews.restaurant_id  
     INNER JOIN user_info ON user_info.user_id = users_reviews.user_id
     WHERE restaurant.restaurant_id = ${id}
+    ORDER BY users_reviews.date desc
   `;
   connection.query(query, function (error, results) {
     if(error) {
