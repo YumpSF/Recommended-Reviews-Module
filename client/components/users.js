@@ -5,11 +5,11 @@ const Users = (props) => (
     {props.reviews.map(user => (
       <div key={user.id}>
         <span> {user.user_name}</span>
-        <b> {user.location}</b>
+        <span> {user.location}</span>
         <div>Reviews: {user.number_reviews}</div>
         <div>Photos: {user.number_photos}</div>
       </div>)
-)}
+    )}
   </div>
 );
 
