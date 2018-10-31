@@ -1,6 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
-// import Reviews from './reviews.js';
+import Users from './users.js';
 
 class App extends React.Component {
   constructor (props) {
@@ -25,14 +25,23 @@ class App extends React.Component {
     })
   }
 
-
   render() {
-    console.log(this.state);
-    return (
-      <div>
-        <h1>Reviews</h1>
-      </div>
-    )
+    //if reviews.length is equal to 0 render restaurant name
+    if (this.state.reviews.length) {
+      return (
+        <div>
+          <h2>Recommended Reviews for {this.state.reviews[0].name}</h2>
+          <Users reviews={this.state.reviews}/>
+        </div>
+      )
+    } else {
+      //if reviews.length is not equal to 0 render div element
+      return (
+        <div>
+          Please wait...
+        </div>
+      )
+    }
   }
 }
 
