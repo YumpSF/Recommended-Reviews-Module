@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-
+import moment from 'moment';
 
 const Wrapper = styled.div`
   padding-left: 20px;
@@ -10,6 +10,7 @@ const Wrapper = styled.div`
     display: inline-grid;
   }
 `;
+
 
 const Users = (props) => (
   <Wrapper>
@@ -21,7 +22,7 @@ const Users = (props) => (
           <div>Reviews: {user.number_reviews}</div>
           <div>Photos: {user.number_photos}</div>
           <p>Score: {user.score}</p>
-          <div>{user.date}</div>
+          <div>{moment(user.date).format("L")}</div>
           <p>{user.review_comment}</p>
         </div>)
       )}
