@@ -14,7 +14,8 @@ create table user_info
   user_id             int auto_increment not null
     primary key,
   user_name           text not null,
-  location       text null,
+  user_avatar         text not null,
+  location            text null,
   number_reviews int  not null,
   number_photos  int  not null
 );
