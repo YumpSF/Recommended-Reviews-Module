@@ -7,6 +7,7 @@ import Search from './search';
 const Wrapper = styled.div`
   h2 {
   font-size: 21px;
+  color: #333333;
     span {
       padding-left: 20px;
       font-size: 21px;
@@ -50,7 +51,7 @@ class App extends React.Component {
   filterReviews = (query) => {
     const { reviews } = this.state;
     const updated = reviews.map(restaurant => {
-      if (restaurant.review.review_comment.toLowerCase().includes(query)) {
+      if (restaurant.review.review_comment.toLowerCase().includes(query.toLowerCase())) {
         return Object.assign({}, restaurant, {
           searched: true,
         });

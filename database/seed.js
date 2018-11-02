@@ -38,10 +38,11 @@ const dataUserReview = [];
 for (let i = 0; i < 1000; i++) {
   var obj = {};
   var urlPath = 'https://s3-us-west-1.amazonaws.com/hrfrontendcapstone/';
+  var stars = 'https://s3-us-west-1.amazonaws.com/hrfrontendcapstone/regular_';
   obj.user_id = Math.floor(Math.random() * 100) + 1;
   obj.date = faker.date.past();
   obj.review_comment = faker.lorem.paragraph();
-  obj.score = Math.floor(Math.random() * 10) / 2 + 0.5;
+  obj.score = stars + Math.floor(Math.random() *9 + 1) + '.png';
   obj.picture_food = urlPath + Math.floor(Math.random() * 9 + 1) + '.jpeg';
   obj.restaurant_id = Math.floor(Math.random() * 100) + 1;
   dataUserReview.push(obj);
