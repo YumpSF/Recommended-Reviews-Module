@@ -39,7 +39,7 @@ class Search extends Component {
   render() {
     return (
       <Wrapper>
-        <input value={this.state.query}
+        <input id="search" type="text" value={this.state.query}
           placeholder="Search within the reviews "
           onChange={this.handleInputChange}
           />

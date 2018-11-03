@@ -1,12 +1,22 @@
 import React from 'react';
-import {mount} from 'enzyme'
+import {mount, shallow, render} from 'enzyme';
+import jest from 'jest-mock';
 import Search from '../../client/components/search.js';
 
-test('', () => {
-  const test = mount(
-    <Search/>
-  );
-  const len = test.find('input').length;
-  expect(len).toBe(1);
+describe('Search Component', () => {
+  it('should render without throwing an error', () => {
+    expect(shallow(<Search />).find('input').exists()).toBe(true)
+  });
+  it('should render a search input', () => {
+    expect(shallow(<Search />).find('#search').length).toBe(1)
+  });
+  it('should call on onChange prop with input value', () => {
+    const onChange = jest.fn();
+    const component = shallow(<Search onChange={onChange}/>);
+    component.find('input').simulate('change', {target: {
+      value: 'New Value'}
+    });
+    expect(component.state('query')).toBe('New Value');
+  });
 });
 
