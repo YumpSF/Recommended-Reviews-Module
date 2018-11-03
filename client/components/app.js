@@ -1,11 +1,26 @@
 import React from 'react';
 import $ from 'jquery';
-// import Reviews from './reviews.js';
+import styled from 'styled-components';
+import Users from './users';
+import Search from './search';
+
+const Wrapper = styled.div`
+  h2 {
+  font-size: 21px;
+  color: #333333;
+    span {
+      padding-left: 20px;
+      font-size: 21px;
+      font-weight: bold;
+      color: #d32323;
+    }
+  }
+`;
 
 class App extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
-    this.state= {
+    this.state = {
       reviews: [],
     };
 
@@ -20,19 +35,57 @@ class App extends React.Component {
   fetchReviews(id) {
     $.ajax(`/api/${id}`, {
       success: (reviews) => {
-        this.setState({reviews})
+        const wrappedReviews = reviews.map(restaurant => {
+          return {
+            review: restaurant,
+            searched: true,
+          };
+        });
+        this.setState({
+          reviews: wrappedReviews,
+        });
       }
-    })
+    });
   }
+
+  filterReviews = (query) => {
+    const { reviews } = this.state;
+    const updated = reviews.map(restaurant => {
+      if (restaurant.review.review_comment.toLowerCase().includes(query.toLowerCase())) {
+        return Object.assign({}, restaurant, {
+          searched: true,
+        });
+      } else {
+        return Object.assign({}, restaurant, {
+          searched: false,
+        });
+      }
+    });
+    this.setState({
+      reviews: updated,
+    });
+  };
 
 
   render() {
-    console.log(this.state);
-    return (
-      <div>
-        <h1>Reviews</h1>
-      </div>
-    )
+    const {reviews} = this.state;
+    // if reviews.length is equal to 0 render restaurant name
+    if (reviews.length) {
+      return (
+        <Wrapper>
+          <h2><span>Recommended Reviews</span> for {this.state.reviews[0].review.name}</h2>
+          <Search reviews={reviews} onChange={this.filterReviews}/>
+          <Users reviews={this.state.reviews}/>
+        </Wrapper>
+      );
+    } else {
+      // if reviews.length is not equal to 0 render div element
+      return (
+        <div>
+          Please wait...
+        </div>
+      );
+    }
   }
 }
 
