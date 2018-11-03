@@ -4,10 +4,11 @@
 
 ## Related Projects
 
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
+  - https://github.com/YumpSF/popular-dishes-and-full-menu
+  - https://github.com/YumpSF/overview
+  - https://github.com/YumpSF/Recommended-Reviews-Module
+  - https://github.com/YumpSF/Proxy_Danny
+ 
 
 ## Table of Contents
 
