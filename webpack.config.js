@@ -1,10 +1,4 @@
 const path = require('path');
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-
-const htmlWebpackPlugin = new HtmlWebpackPlugin({
-    template: "./client/src/index.html",
-    filename: "./index.html"
-});
 
 module.exports = {
     entry: "./client/src/index.js", //tells where webpack to start looking for files
@@ -25,12 +19,8 @@ module.exports = {
             }
         ]
     },
-    plugins: [htmlWebpackPlugin],
     resolve: {
         extensions: [".js", ".jsx"]
-    },
-    devServer: {
-        port: 1111
     },
     mode: 'development',
 };
