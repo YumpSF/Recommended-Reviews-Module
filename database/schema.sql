@@ -1,3 +1,4 @@
+DROP DATABASE IF EXISTS yump_SF;
 create database yump_SF;
 
 use yump_SF;
