@@ -1,5 +1,5 @@
 import React from 'react';
-import {mount, shallow, render} from 'enzyme';
+import {shallow} from 'enzyme';
 import jest from 'jest-mock';
 import Search from '../../client/components/search.js';
 
