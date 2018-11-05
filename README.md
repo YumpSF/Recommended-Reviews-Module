@@ -1,30 +1,37 @@
 # YumpSF
 
-> Food Reviews
+> Food Reviews 
 
 ## Related Projects
 
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
+  - https://github.com/YumpSF/popular-dishes-and-full-menu
+  - https://github.com/YumpSF/overview
+  - https://github.com/YumpSF/reservation-hours
 
 ## Table of Contents
 
-1. [Usage](#Usage)
+1. [Setup](#Setup)
 1. [Requirements](#requirements)
 1. [Development](#development)
 
-## Usage
+## Setup
 
-> Some usage instructions
+> Npm run build (To build webpack)
+
+> Npm run database (To build mySql database)
+
+> Npm run seed (Seed mock data to mySql)
+
+> Npm server-dev (Express server)
+
+> Npm test (Enzyme/jest test)
 
 ## Requirements
 
 An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 
 - Node 6.13.0
-- etc
+- mySql
 
 ## Development
 
