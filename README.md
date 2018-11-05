@@ -2,6 +2,8 @@
 
 > Module containing all users reviews for restaurants
 
+![screen shot 2018-11-02 at 7 30 51 pm](https://user-images.githubusercontent.com/11156534/48022825-01fe8e00-e0f1-11e8-8533-9fa2adbc93b8.png)
+
 ## Related Projects
 
   - https://github.com/YumpSF/popular-dishes-and-full-menu
