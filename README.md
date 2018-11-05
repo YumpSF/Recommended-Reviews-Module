@@ -18,7 +18,7 @@
 1. [Requirements](#requirements)
 1. [Development](#development)
 
-<<<<<<< HEAD
+
 ## Setup
 
 > -Npm install
