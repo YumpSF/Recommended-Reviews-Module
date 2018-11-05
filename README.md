@@ -8,7 +8,6 @@
 
   - https://github.com/YumpSF/popular-dishes-and-full-menu
   - https://github.com/YumpSF/overview
-  - https://github.com/YumpSF/Recommended-Reviews-Module
   - https://github.com/YumpSF/reservation-hours
   - https://github.com/YumpSF/Proxy_Danny
 
@@ -33,21 +32,7 @@
 > -Npm start (Express server)
 
 > -Npm test (To run enzyme/jest test)
-=======
 
-
-## Setup
-
-> Npm run build (To build webpack)
-
-> Npm run database (To build mySql database)
-
-> Npm run seed (Seed mock data to mySql)
-
-> Npm server-dev (Express server)
-
-> Npm test (Enzyme/jest test)
->>>>>>> ac50262b4746f8eb80517061d470a595f7eab4ce
 
 ## Requirements
 
