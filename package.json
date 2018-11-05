@@ -8,12 +8,11 @@
     "node": ">=6.13.0"
   },
   "scripts": {
-    "start": "webpack-dev-server --mode development",
+    "start": "nodemon server/index.js",
     "build": "webpack --mode production -w",
     "seed": "node database/seed.js",
     "database": "mysql -u root < database/schema.sql",
     "test": "jest --coverage --",
-    "server-dev": "nodemon server/index.js"
   },
   "dependencies": {
     "@babel/core": "^7.1.2",
