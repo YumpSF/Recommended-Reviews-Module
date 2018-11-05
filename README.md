@@ -1,6 +1,6 @@
 # YumpSF
 
-> Food Reviews 
+> Module containing all users reviews for restaurants
 
 ## Related Projects
 
