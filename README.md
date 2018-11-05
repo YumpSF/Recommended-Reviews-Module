@@ -6,7 +6,9 @@
 
   - https://github.com/YumpSF/popular-dishes-and-full-menu
   - https://github.com/YumpSF/overview
+  - https://github.com/YumpSF/Recommended-Reviews-Module
   - https://github.com/YumpSF/reservation-hours
+  - https://github.com/YumpSF/Proxy_Danny
 
 ## Table of Contents
 
