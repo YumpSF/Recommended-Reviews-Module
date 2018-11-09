@@ -1,8 +1,8 @@
 const faker = require('faker');
-const db = require('./index.js');
+// const db = require('./index.js');
 const path = require('path');
 const fs = require('fs');
-
+const moment = require('moment');
 // generate restaurant table data (100)
 const dataRestaurant = [];
 for (let i = 0; i < 100; i++) {
@@ -45,11 +45,12 @@ for (let i = 0; i < 1000; i++) {
   var stars = 'https://s3-us-west-1.amazonaws.com/hrfrontendcapstone/regular_';
   reviews.id = i + 1;
   reviews.user_id = Math.floor(Math.random() * 100) + 1;
+  reviews.restaurant_id = Math.floor(Math.random() * 100) + 1;
   reviews.date = faker.date.past();
+  reviews.date = moment(reviews.date).format('YYYY-MM-DD');
   reviews.review_comment = faker.lorem.paragraph();
   reviews.score = stars + Math.floor(Math.random() *9 + 1) + '.png';
   reviews.picture_food = urlPath + Math.floor(Math.random() * 9 + 1) + '.jpeg';
-  reviews.restaurant_id = Math.floor(Math.random() * 100) + 1;
   dataUserReview.push(reviews);
   // const queryString = 'Insert INTO users_reviews(user_id, date, review_comment, score, picture_food, restaurant_id) VALUES(?, ?, ?, ?, ?, ?)';
   // db.connection.query(queryString, [obj.user_id, obj.date, obj.review_comment, obj.score, obj.picture_food, obj.restaurant_id], (err) => {
