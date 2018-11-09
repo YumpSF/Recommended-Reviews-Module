@@ -32,6 +32,6 @@ create table users_reviews
   review_comment text not null,
   score          text not null,
   picture_food   text not null,
-  foreign key (user_id) references yump_sf.user_info (user_id),
-  foreign key (restaurant_id) references yump_sf.restaurant (restaurant_id)
+  foreign key (user_id) references user_info (user_id),
+  foreign key (restaurant_id) references restaurant (restaurant_id)
 );
