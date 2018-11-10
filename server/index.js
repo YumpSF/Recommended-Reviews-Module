@@ -1,8 +1,21 @@
-var express = require('express');
-var app = express();
-var bodyParser = require('body-parser');
-var db = require('../database/index.js');
-var path = require ('path');
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
+const db = require('../database/index.js');
+const compression = require("compression");
+const path = require ('path');
+
+
+function shouldCompress(req, res) {
+  if (req.headers["x-no-compression"]) return false;
+  return compression.filter(req, res);
+}
+
+app.use(express.static("build"));
+app.use(compression({
+  level: 2,               // set compression level from 1 to 9 (6 by default)
+  filter: shouldCompress, // set predicate to determine whether to compress
+}));
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
