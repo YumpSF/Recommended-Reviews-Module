@@ -33,7 +33,7 @@ class App extends React.Component {
   }
 
   fetchReviews(id) {
-    $.ajax(`/api/${id}`, {
+    $.ajax(`http://100.24.121.85:3000/api/${id}`, {
       success: (reviews) => {
         const wrappedReviews = reviews.map(restaurant => {
           return {
