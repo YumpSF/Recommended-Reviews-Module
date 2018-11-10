@@ -14,3 +14,4 @@ COPY ["restaurant.csv", "user_info.csv", "users_reviews.csv", "./seed/"]
 
 COPY ./seed.sh/ /docker-entrypoint-initdb.d/
 
+EXPOSE 3306

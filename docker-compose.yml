@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  database:
+    build: ./database/
+    environment:
+      - MYSQL_ROOT_PASSWORD=
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - "3306:3306"
+
+  client:
+    build: ./
+    links:
+      - 'database'
+    ports:
+      - "3000:3000"
+
+
