@@ -1,37 +1,37 @@
-DROP DATABASE IF EXISTS yump_SF;
-
-create database yump_SF;
+CREATE DATABASE yump_SF;
 
 use yump_SF;
 
-create table restaurant
-(
-  restaurant_id   int auto_increment not null
-    primary key,
-  name text not null
+create table restaurant (
+  id INT auto_increment primary key,
+  name TEXT not null
 );
 
-create table user_info
-(
-  user_id             int auto_increment not null
-    primary key,
-  user_name           text not null,
-  user_avatar         text not null,
-  location            text not null,
-  number_reviews      int  not null,
-  number_photos       int  not null
+create table reviews (
+  id INT auto_increment primary key,
+  restaurant_id INT  not null,
+  user_name TEXT not null,
+  user_avatar TEXT not null,
+  location TEXT not null,
+  date DATE not null,
+  comment TEXT not null,
+  score TINYINT not null,
+  food_image TEXT not null,
+  foreign key (restaurant_id)
+    references restaurant (id)
+    ON DELETE CASCADE
 );
 
-create table users_reviews
-(
-  id             int auto_increment not null
-    primary key,
-  user_id        int  not null,
-  restaurant_id  int  not null,
-  date           date not null,
-  review_comment text not null,
-  score          text not null,
-  picture_food   text not null,
-  foreign key (user_id) references user_info (user_id),
-  foreign key (restaurant_id) references restaurant (restaurant_id)
-);
+LOAD DATA LOCAL INFILE './database/restaurant.csv' 
+INTO TABLE restaurant 
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+
+LOAD DATA LOCAL INFILE './database/review.csv' 
+INTO TABLE reviews 
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
