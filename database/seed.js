@@ -1,97 +1,118 @@
 const faker = require('faker');
-// const db = require('./index.js');
-const path = require('path');
 const fs = require('fs');
 const moment = require('moment');
-// generate restaurant table data (100)
-const dataRestaurant = [];
-for (let i = 0; i < 100; i++) {
-  var restaurant = {};
-  restaurant.restaurant_id = i + 1;
-  restaurant.name = faker.company.companyName();
-  dataRestaurant.push(restaurant);
-  // const queryString = 'Insert INTO restaurant(name) VALUES(?)';
-  // db.connection.query(queryString, [obj.name], (err) => {
-  //   if (err) {
-  //     console.log(err);
-  //   }
-  // });
-}
 
-// generate user info table data (100)
-const dataUserInfo = [];
-for (let i = 0; i < 100; i++) {
-  var user = {};
-  user.user_id = i + 1;
-  user.user_name = faker.name.findName();
-  user.user_avatar = faker.image.avatar();
-  user.location = `${faker.address.city()} ${faker.address.state()}`;
-  user.number_reviews = Math.floor(Math.random() * 50) + 1;
-  user.number_photos = Math.floor(Math.random() * 40) + 1;
-  dataUserInfo.push(user);
-  // const queryString = 'Insert INTO user_info(user_name, user_avatar,location, number_reviews, number_photos) VALUES(?, ?, ?, ?, ?)';
-  // db.connection.query(queryString, [obj.user_name, obj.user_avatar, obj.location, obj.number_reviews, obj.number_photos], (err) => {
-  //   if (err) {
-  //     console.log(err);
-  //   }
-  // });
-}
+const randomInt = max => Math.floor(Math.random() * max + 1);
 
-// generate user review table data (1000)
-const dataUserReview = [];
-for (let i = 0; i < 1000; i++) {
-  var reviews = {};
-  var urlPath = 'https://s3-us-west-1.amazonaws.com/hrfrontendcapstone/';
-  var stars = 'https://s3-us-west-1.amazonaws.com/hrfrontendcapstone/regular_';
-  reviews.id = i + 1;
-  reviews.user_id = Math.floor(Math.random() * 100) + 1;
-  reviews.restaurant_id = Math.floor(Math.random() * 100) + 1;
-  reviews.date = faker.date.past();
-  reviews.date = moment(reviews.date).format('YYYY-MM-DD');
-  reviews.review_comment = faker.lorem.paragraph();
-  reviews.score = stars + Math.floor(Math.random() *9 + 1) + '.png';
-  reviews.picture_food = urlPath + Math.floor(Math.random() * 9 + 1) + '.jpeg';
-  dataUserReview.push(reviews);
-  // const queryString = 'Insert INTO users_reviews(user_id, date, review_comment, score, picture_food, restaurant_id) VALUES(?, ?, ?, ?, ?, ?)';
-  // db.connection.query(queryString, [obj.user_id, obj.date, obj.review_comment, obj.score, obj.picture_food, obj.restaurant_id], (err) => {
-  //   if (err) {
-  //     console.log(err);
-  //   }
-  // });
-}
+const writeReviewCSV = () => {
+  // const start = Date.now();
+  const stream = fs.createWriteStream('./database/review.csv');
+  let i = 0;
+  function write() {
+    while (i < 10000) {
+      let fakeDate = faker.date.past();
+      fakeDate = JSON.stringify(fakeDate).slice(1, 11);
+      const review = {};
 
-const csvConverter = (arr) => {
-  let output = '';
-  let column = [];
-  for (let key in arr[0]) {
-    column.push(key);
-  }
-  output += `${column.join()}\n`;
-  for (let i = 0; i < arr.length; i++) {
-    column = [];
-    for (let key in arr[i]) {
-      column.push(arr[i][key]);
+      review.restaurant_id = randomInt(1000);
+      review.user_name = faker.name.findName();
+      review.user_avatar = faker.image.avatar();
+      review.location = `${faker.address.city()} ${faker.address.state()}`;
+      review.date = moment(fakeDate).format('YYYY-MM-DD');
+      review.comment = faker.lorem.paragraph();
+      review.score = randomInt(10);
+      review.food_image = `https://s3-us-west-1.amazonaws.com/yump-sf-images/${randomInt(499)}.jpg`;
+
+      i += 1;
+      if (!stream.write(`${i},${review.restaurant_id},"${review.user_name}","${review.user_avatar}","${review.location}","${review.date}","${review.comment}",${review.score},"${review.food_image}"\r\n`)) {
+        return;
+      }
+      if (i % 100) {
+        console.log(`${(i / 10000 * 100).toFixed(2)} %`);
+        console.clear();
+      }
     }
-    output += `${column.join()}\n`;
+    stream.end();
+    // const end = Date.now();
+    // const elapsed = end - start;
+    // const minutes = Math.floor(elapsed / 60000);
+    // const seconds = ((elapsed % 60000) / 1000).toFixed(0);
+    // console.log(seconds < 60 ? seconds : minutes);
   }
-  return output;
+  stream.on('drain', () => {
+    write();
+  });
+
+  stream.write('id,restaurant_id,user_name,user_avatar,location,date,comment,score,food_image\r\n');
+  write();
 };
 
-const restaurantCSV = csvConverter(dataRestaurant);
-const userInfoCSV = csvConverter(dataUserInfo);
-const userReviewCSV = csvConverter(dataUserReview);
+// const writeUserCSV = () => {
+//   const start = Date.now();
+//   const stream = fs.createWriteStream('./database/user.csv');
+//   let i = 0;
+//   function write() {
+//     // change back to 50 million after testing
+//     while (i < 1000) {
+//       const user_name = faker.name.findName();
+//       const user_avatar = faker.image.avatar();
+//       const location = `${faker.address.city()} ${faker.address.state()}`;
+//       const number_reviews = Math.floor(Math.random() * 50) + 1;
+//       const number_photos = Math.floor(Math.random() * 40) + 1;
 
-fs.writeFile(path.join(__dirname, 'restaurant.csv'), restaurantCSV, (err) => {
-  if (err) throw err;
-  console.log('saved');
-});
+//       i += 1;
+//       if (!stream.write(`${i},"${user_name} ${i}","${user_avatar}","${location}",${number_reviews},${number_photos}\r\n`)) {
+//         return;
+//       }
+//       if (i % 100) {
+//         console.log(`${(i / 1000 * 100).toFixed(2)} %`);
+//         console.clear();
+//       }
+//     }
+//     stream.end(writeReviewCSV());
+//     const end = Date.now();
+//     const elapsed = end - start;
+//     const minutes = Math.floor(elapsed / 60000);
+//     const seconds = ((elapsed % 60000) / 1000).toFixed(0);
+//     console.log(seconds < 60 ? seconds : minutes);
+//   }
+//   stream.on('drain', () => {
+//     write();
+//   });
 
-fs.writeFile(path.join(__dirname, 'user_info.csv'), userInfoCSV, (err) => {
-  if (err) throw err;
-  console.log('saved');
-});
+//   stream.write('id,user_name,user_avatar,location,number_reviews,number_photos\r\n');
+//   write();
+// };
 
-fs.writeFile(path.join(__dirname, 'users_reviews.csv'), userReviewCSV, (err) => {
-  if (err) throw err;
-  console.log('saved');
-});
+const writeRestaurantCSV = () => {
+  // const start = Date.now();
+  const stream = fs.createWriteStream('./database/restaurant.csv');
+  let i = 0;
+  function write() {
+    // change back to 50 million after testing
+    while (i < 1000) {
+      const name = faker.company.companyName();
+      i += 1;
+      if (!stream.write(`${i},"${name} ${i}",\r\n`)) {
+        return;
+      }
+      if (i % 100) {
+        console.log(`${(i / 1000 * 100).toFixed(2)} %`);
+        console.clear();
+      }
+    }
+    stream.end(writeReviewCSV());
+    // const end = Date.now();
+    // const elapsed = end - start;
+    // const minutes = Math.floor(elapsed / 60000);
+    // const seconds = ((elapsed % 60000) / 1000).toFixed(0);
+    // console.log(seconds < 60 ? seconds : minutes);
+  }
+  stream.on('drain', () => {
+    write();
+  });
+
+  stream.write('id,name\r\n');
+  write();
+};
+writeRestaurantCSV();
