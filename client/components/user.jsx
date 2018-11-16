@@ -72,6 +72,7 @@ const Wrapper = styled.div`
     .food_picture {
       height: 300px;
       width: 300px;
+      border-radius: 8px;
     }
   }
   .date {
