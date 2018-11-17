@@ -8,7 +8,7 @@ const writeReviewCSV = () => {
   const stream = fs.createWriteStream('./database/review.csv');
   let i = 0;
   function write() {
-    while (i < 10000) {
+    while (i < 100000000) {
       let fakeDate = faker.date.past();
       fakeDate = JSON.stringify(fakeDate).slice(1, 11);
       const review = {};
@@ -23,7 +23,7 @@ const writeReviewCSV = () => {
       review.food_image = `https://s3-us-west-1.amazonaws.com/yump-sf-images/${randomInt(499)}.jpg`;
 
       i += 1;
-      if (!stream.write(`${review.restaurant_id},"${review.user_name}","${review.user_avatar}","${review.location}","${review.date}","${review.comment}",${review.score},"${review.food_image}"\r\n`)) {
+      if (!stream.write(`${review.restaurant_id},"${review.user_name}","${review.user_avatar}","${review.location}","${review.date}","${review.comment}",${review.score},"${review.food_image}"\n`)) {
         return;
       }
       if (i % 100) {
@@ -37,7 +37,7 @@ const writeReviewCSV = () => {
     write();
   });
 
-  stream.write('restaurant_id,user_name,user_avatar,location,date,comment,score,food_image\r\n');
+  stream.write('restaurant_id,user_name,user_avatar,location,date,comment,score,food_image\n');
   write();
 };
 
@@ -45,14 +45,14 @@ const writeRestaurantCSV = () => {
   const stream = fs.createWriteStream('./database/restaurant.csv');
   let i = 0;
   function write() {
-    while (i < 1000) {
+    while (i < 10000000) {
       const name = faker.company.companyName();
       i += 1;
-      if (!stream.write(`"${name} ${i}",\r\n`)) {
+      if (!stream.write(`"${name} ${i}"\n`)) {
         return;
       }
       if (i % 100) {
-        console.log(`${(i / 1000 * 100).toFixed(2)} %`);
+        console.log(`${(i / 10000000 * 100).toFixed(2)} %`);
         console.clear();
       }
     }
@@ -67,7 +67,7 @@ const writeRestaurantCSV = () => {
     write();
   });
 
-  stream.write('name\r\n');
+  stream.write('name\n');
   write();
 };
 writeRestaurantCSV();
