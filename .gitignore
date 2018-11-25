@@ -25,3 +25,8 @@ build/
 public/dist/bundled.js
 
 images/
+
+database/restaurant.csv
+database/review.csv
+database/review2.csv
+database/mongoReview.json

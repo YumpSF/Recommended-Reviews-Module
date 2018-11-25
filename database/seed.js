@@ -5,15 +5,15 @@ const moment = require('moment');
 const randomInt = max => Math.floor(Math.random() * max + 1);
 
 const writeReviewCSV = () => {
-  const stream = fs.createWriteStream('./database/review.csv');
+  const stream = fs.createWriteStream('./database/review2.csv');
   let i = 0;
   function write() {
-    while (i < 100000000) {
+    while (i < 80000000) {
       let fakeDate = faker.date.past();
       fakeDate = JSON.stringify(fakeDate).slice(1, 11);
       const review = {};
 
-      review.restaurant_id = randomInt(1000);
+      review.restaurant_id = randomInt(10000000);
       review.user_name = faker.name.findName();
       review.user_avatar = faker.image.avatar();
       review.location = `${faker.address.city()} ${faker.address.state()}`;
@@ -27,7 +27,7 @@ const writeReviewCSV = () => {
         return;
       }
       if (i % 100) {
-        console.log(`${(i / 10000 * 100).toFixed(2)} %`);
+        console.log(`${(i / 80000000 * 100).toFixed(2)} %`);
         console.clear();
       }
     }
@@ -57,11 +57,6 @@ const writeRestaurantCSV = () => {
       }
     }
     stream.end(writeReviewCSV());
-    // const end = Date.now();
-    // const elapsed = end - start;
-    // const minutes = Math.floor(elapsed / 60000);
-    // const seconds = ((elapsed % 60000) / 1000).toFixed(0);
-    // console.log(seconds < 60 ? seconds : minutes);
   }
   stream.on('drain', () => {
     write();
@@ -70,4 +65,5 @@ const writeRestaurantCSV = () => {
   stream.write('name\n');
   write();
 };
-writeRestaurantCSV();
+// writeRestaurantCSV();
+writeReviewCSV();
