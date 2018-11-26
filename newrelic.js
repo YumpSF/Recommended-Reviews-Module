@@ -9,11 +9,11 @@ exports.config = {
   /**
    * Array of application names.
    */
-  app_name: ['whatslunch'],
+  app_name: ['databaseName'],
   /**
    * Your New Relic license key.
    */
-  license_key: 'b240941a4cd7d8376de56964abde292dda8653c4',
+  license_key: 'password',
   logging: {
     /**
      * Level at which to log. 'trace' is most useful to New Relic when diagnosing
