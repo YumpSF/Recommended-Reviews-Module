@@ -12,11 +12,15 @@
     "build": "webpack -w",
     "seed": "node database/seed.js",
     "schema": "mysql -u root --local-infile < database/schema.sql",
+<<<<<<< HEAD
     "test": "jest --coverage --",
     "postgres:seed": "node database/seed.js",
     "mongodb:seed": "node mongoSeed.js",
     "postgres:init": "createdb whatslunch && psql whatslunch < database/schema.sql",
     "mongodb:init": "mongoimport -d whats_lunch -c restaurant_reviews --file database/mongoReview.json"
+=======
+    "test": "jest --coverage --"
+>>>>>>> 120b116db8885360688788a2bf49c32e16bfa8c1
   },
   "dependencies": {
     "@babel/core": "^7.1.2",
@@ -33,7 +37,10 @@
     "mongoose": "^5.3.13",
     "morgan": "^1.9.1",
     "mysql": "^2.16.0",
+<<<<<<< HEAD
     "newrelic": "^4.11.0",
+=======
+>>>>>>> 120b116db8885360688788a2bf49c32e16bfa8c1
     "pg-copy-streams": "^1.2.0",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
