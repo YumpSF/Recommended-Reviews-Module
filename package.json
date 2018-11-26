@@ -8,7 +8,7 @@
     "node": ">=6.13.0"
   },
   "scripts": {
-    "start": "node server/index.js",
+    "start": "nodemon server/index.js",
     "build": "webpack -w",
     "seed": "node database/seed.js",
     "schema": "mysql -u root --local-infile < database/schema.sql",
@@ -31,6 +31,7 @@
     "jquery": "^3.3.1",
     "moment": "^2.22.2",
     "mongoose": "^5.3.13",
+    "morgan": "^1.9.1",
     "mysql": "^2.16.0",
     "newrelic": "^4.11.0",
     "pg-copy-streams": "^1.2.0",

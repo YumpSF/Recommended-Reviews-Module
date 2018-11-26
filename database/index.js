@@ -2,8 +2,9 @@ const mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost/whats_lunch');
 
-const repoSchema = mongoose.Schema({
-  restaurant_id: Number,
+const restaurantSchema = mongoose.Schema({
+  id: Number,
+  restaurant_name: String,
   reviews: [{
     user_name: String,
     user_avatar: String,
@@ -14,11 +15,21 @@ const repoSchema = mongoose.Schema({
   }],
 });
 
-const Repo = mongoose.model('restaurant_review', repoSchema);
+const Restaurant = mongoose.model('restaurant_reviews', restaurantSchema);
 
 // retrieve
-const retrieve = (restaurant_id, callback) => {
-  Repo.find({ restaurant_id }, (err, res) => {
+const retrieve = (id, callback) => {
+  Restaurant.find({ id }, (err, res) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, res);
+    }
+  });
+};
+
+const addRestaurant = (restaurant_name, callback) => {
+  Restaurant.create({ restaurant_name }, (err, res) => {
     if (err) {
       callback(err, null);
     } else {
@@ -28,3 +39,4 @@ const retrieve = (restaurant_id, callback) => {
 };
 
 module.exports.retrieve = retrieve;
+module.exports.addRestaurant = addRestaurant;
