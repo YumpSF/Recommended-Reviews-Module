@@ -1,29 +1,5 @@
-const mongoose = require('mongoose');
+const mysql = require('mysql');
 
-<<<<<<< HEAD
-mongoose.connect('mongodb://localhost/whats_lunch');
-
-const restaurantSchema = mongoose.Schema({
-  id: Number,
-  restaurant_name: String,
-  reviews: [{
-    user_name: String,
-    user_avatar: String,
-    location: String,
-    date: String,
-    score: Number,
-    food_image: String,
-  }],
-});
-
-const Restaurant = mongoose.model('restaurant_reviews', restaurantSchema);
-
-// retrieve
-const retrieve = (id, callback) => {
-  Restaurant.find({ id }, (err, res) => {
-    if (err) {
-      callback(err, null);
-=======
 // connect to database
 const connection = mysql.createConnection({
   // host: 'database',
@@ -52,27 +28,12 @@ const restaurantReviews = (id, callback) => {
   connection.query(query, (error, results) => {
     if (error) {
       callback(error, null);
->>>>>>> 120b116db8885360688788a2bf49c32e16bfa8c1
     } else {
-      callback(null, res);
+      callback(null, results);
     }
   });
 };
 
-<<<<<<< HEAD
-const addRestaurant = (restaurant_name, callback) => {
-  Restaurant.create({ restaurant_name }, (err, res) => {
-    if (err) {
-      callback(err, null);
-    } else {
-      callback(null, res);
-    }
-  });
-};
-
-module.exports.retrieve = retrieve;
-module.exports.addRestaurant = addRestaurant;
-=======
 const getOne = (id, callback) => {
   const query = 'SELECT * FROM restaurant WHERE id = (?)';
   connection.query(query, [id], (error, results) => {
@@ -116,4 +77,3 @@ const deleteRestaurant = (id, callback) => {
 module.exports = {
   connection, restaurantReviews, addRestaurant, editRestaurant, deleteRestaurant, getOne,
 };
->>>>>>> 120b116db8885360688788a2bf49c32e16bfa8c1

@@ -22,5 +22,11 @@ coverage
 
 # Compiled Dirs (http://nodejs.org/api/addons.html)
 build/
-dist/bundled.js
+public/dist/bundled.js
 
+images/
+
+database/restaurant.csv
+database/review.csv
+database/review2.csv
+database/mongoReview.json

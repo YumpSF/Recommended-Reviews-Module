@@ -51,4 +51,11 @@ From within the root directory:
 npm install -g webpack
 npm install
 ```
+## Endpoints
 
+| Action        | Method        | Endpoint                      | Purpose              |
+| ------------- | ------------- | ----------------------------- | -------------------- |
+| Create        | POST          | /restaurants/:name            | Insert new name      |
+| Read(one)     | GET           | /restaurant/:restaurant_id    | Get one row          |
+| Update        | PUT           | /api/:restaurant_id/          | Update one row       |
+| Delete        | DELETE        | /api/:restaurant_id/          | Delete one row       |
